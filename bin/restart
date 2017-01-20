@@ -18,8 +18,8 @@ options = {
 
 connection = WinRM::Connection.new(options)
 connection.shell(:powershell) do |shell|
-  restart_commnd = 'get-service -name relserver | restart-service'
-  output = shell.run(restart_commnd) do |stdout, stderr|
+  restart_command = 'get-service -name relserver | restart-service'
+  output = shell.run(restart_command) do |stdout, stderr|
     STDOUT.print stdout
     STDERR.print stderr
   end
