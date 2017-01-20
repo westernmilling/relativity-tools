@@ -7,7 +7,8 @@ require 'winrm'
 
 options = {
   endpoint: format(
-    'http://%s:%s/wsman',
+    '%s://%s:%s/wsman',
+    Figaro.env.PSRP_PROTOCOL,
     Figaro.env.RELATIVITY_HOST,
     Figaro.env.PSRP_PORT
   ),
