@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift File.expand_path('../../', __FILE__)
+
+require 'config/initializers/figaro'
+require 'winrm'
+
+options = {
+  endpoint: format(
+    'http://%s:%s/wsman',
+    Figaro.env.RELATIVITY_HOST,
+    Figaro.env.PSRP_PORT
+  ),
+  user: Figaro.env.USERNAME,
+  password: Figaro.env.PASSWORD
+}
+
+connection = WinRM::Connection.new(options)
+connection.shell(:powershell) do |shell|
+  restart_commnd = 'get-service -name relserver | restart-service'
+  output = shell.run(restart_commnd) do |stdout, stderr|
+    STDOUT.print stdout
+    STDERR.print stderr
+  end
+  puts "The script exited with exit code #{output.exitcode}"
+end
