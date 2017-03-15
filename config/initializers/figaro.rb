@@ -5,5 +5,5 @@ Figaro.application = Figaro::Application.new(environment: 'production',
 Figaro.load
 Figaro.require_keys('PSRP_PORT',
                     'RELATIVITY_HOST',
-                    'USER',
+                    'USERNAME',
                     'PASSWORD')
